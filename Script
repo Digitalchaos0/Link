@@ -1,68 +1,82 @@
-local Library = loadstring(game:HttpGet("https://raw.githubusercontent.com/xHeptc/Kavo-UI-Library/main/source.lua"))()
-local Window = Library.CreateLib("AIO Hub", "Ocean")
+local Rayfield = loadstring(game:HttpGet('https://sirius.menu/rayfield'))()
 
--- Main
-local Main = Window:NewTab("🏠Home🏠")
-local MainSection = Main:NewSection("Main")
+local Window = Rayfield:CreateWindow({
+    Name = "AIO Hub",
+    LoadingTitle = "All In One Hub",
+    LoadingSubtitle = "by Raven and Digitalchaos",
+    ConfigurationSaving = {
+       Enabled = true,
+       FolderName = nil, -- Create a custom folder for your hub/game
+       FileName = "AIO Hub"
+    },
+    Discord = {
+       Enabled = false,
+       Invite = "noinvitelink", -- The Discord invite code, do not include discord.gg/. E.g. discord.gg/ABCD would be ABCD
+       RememberJoins = true -- Set this to false to make them join the discord every time they load it up
+    },
+    KeySystem = false, -- Set this to true to use our key system
+    KeySettings = {
+       Title = "AIO Hub | Key",
+       Subtitle = "Key System",
+       Note = "You must have a key to  access to the menu you can ask the script owners in discord to get the key we put a key on this script because this script is private",
+       FileName = "Key", -- It is recommended to use something unique as other scripts using Rayfield may overwrite your key file
+       SaveKey = true, -- The user's key will be saved, but if you change the key, they will be unable to use your script
+       GrabKeyFromSite = false, -- If this is true, set Key below to the RAW site you would like Rayfield to get the key from
+       Key = {"KEY_Sbadp73SHaHA7baap023921912", "KEY_23982DHQSdawdb9SQJAD0"} -- List of keys that will be accepted by the system, can be RAW file links (pastebin, github etc) or simple strings ("hello","key22")
+    }
+})
 
-MainSection:NewButton("Infinite jump", "Infinite jump", function()
-    -- Toggles the infinite jump between on or off on every script run
-    _G.infinjump = not _G.infinjump
+local MainTab = Window:CreateTab("🏠Home", nil)
+local HomeSection = MainTab:CreateSection("Main")
 
-    if _G.infinJumpStarted == nil then
-        -- Ensures this only runs once to save resources
-        _G.infinJumpStarted = true
-        
-        -- Notifies readiness
-        game.StarterGui:SetCore("SendNotification", {Title="AIO Hub", Text="The All In One Hub Infinite Jump exploit is ready!", Duration=5})
-    
-        -- The actual infinite jump
-        local plr = game:GetService('Players').LocalPlayer
-        local m = plr:GetMouse()
-        m.KeyDown:Connect(function(k)
-            if _G.infinjump then
-                if k:byte() == 32 then
-                    humanoid = game:GetService'Players'.LocalPlayer.Character:FindFirstChildOfClass('Humanoid')
-                    humanoid:ChangeState('Jumping')
-                    wait()
-                    humanoid:ChangeState('Seated')
-                end
+Rayfield:Notify({
+    Title = "Welcome Player",
+    Content = "Welcome player to the menu",
+    Duration = 6.5,
+    Image = nil,
+    Actions = { -- Notification Buttons
+        Ignore = {
+            Name = "Executing",
+            Callback = function()
+                print("Executed the script!")
             end
-        end)
-    end
-end)
+        },
+    },
+})
 
-MainSection:NewToggle("Super-Human", "Go fast and jump high", function(state)
-    if state then
-        game.Players.LocalPlayer.Character.Humanoid.WalkSpeed = 120
-        game.Players.LocalPlayer.Character.Humanoid.JumpPower = 120
-    else
-        game.Players.LocalPlayer.Character.Humanoid.WalkSpeed = 16
-        game.Players.LocalPlayer.Character.Humanoid.JumpPower = 50
-    end
-end)
+local Button = MainTab:CreateButton({
+    Name = "Infinite yield",
+    Callback = function()
+         loadstring(game:HttpGet("https://cdn.wearedevs.net/scripts/Infinite%20Yield.txt"))()
+    end,
+})
 
-MainSection:NewButton("Infinite yield", "Executes the infinite yield script", function()
-    loadstring(game:HttpGet('https://raw.githubusercontent.com/EdgeIY/infiniteyield/master/source'))()
-end)
+local Button = MainTab:CreateButton({
+    Name = "Infinite jump",
+    Callback = function()
+        -- Toggles the infinite jump between on or off on every script run
+        _G.infinjump = not _G.infinjump
 
-MainSection:NewButton("nameless admin", "Executes the nameless admin script", function()
-    loadstring(game:HttpGet('https://raw.githubusercontent.com/FilteringEnabled/NamelessAdmin/main/Source'))()
-end)    
-
--- LOCAL PLAYER
-local Player = Window:NewTab("Player")
-local PlayerSection = Player:NewSection("Player")
-
-PlayerSection:NewSlider("Walkspeed", "Changes your walkspeed", 500, 16, function(s)
-    game.Players.LocalPlayer.Character.Humanoid.WalkSpeed = s
-end)
-
-PlayerSection:NewSlider("JumpPower", "Changes your Jump power", 350, 50, function(s)
-    game.Players.LocalPlayer.Character.Humanoid.JumpPower = s
-end)
-
-PlayerSection:NewButton("Reset WS/JP", "Resets to all defaults", function()
-    game.Players.LocalPlayer.Character.Humanoid.WalkSpeed = 16
-    game.Players.LocalPlayer.Character.Humanoid.JumpPower = 50
-end)
+        if _G.infinJumpStarted == nil then
+            -- Ensures this only runs once to save resources
+            _G.infinJumpStarted = true
+            
+            -- Notifies readiness
+            game.StarterGui:SetCore("SendNotification", {Title="AIO Hub", Text="The AIO Hub Infinite Jump exploit is ready!", Duration=5})
+        
+            -- The actual infinite jump
+            local plr = game:GetService('Players').LocalPlayer
+            local m = plr:GetMouse()
+            m.KeyDown:connect(function(k)
+                if _G.infinjump then
+                    if k:byte() == 32 then
+                        humanoid = game:GetService'Players'.LocalPlayer.Character:FindFirstChildOfClass('Humanoid')
+                        humanoid:ChangeState('Jumping')
+                        wait()
+                        humanoid:ChangeState('Seated')
+                    end
+                end
+            end)
+        end
+    end,
+})
