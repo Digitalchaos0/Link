@@ -114,7 +114,7 @@ end
 local ScriptsTab = Window:CreateTab("Other Scripts", nil)
 local ScriptsSection = Tab:CreateSection("Other Scripts")
 
-local Button = Tab:CreateButton({
+local Button = ScriptsTab:CreateButton({
    Name = "Infinite yield",
    Callback = function()
 if IY_LOADED and not _G.IY_DEBUG == true then
@@ -12537,7 +12537,7 @@ end)
    end,
 })
 
-local Button = Tab:CreateButton({
+local Button = ScriptsTab:CreateButton({
    Name = "Nameless Admin",
    Callback = function()
 --[[
@@ -12563,7 +12563,7 @@ local Button = Tab:CreateButton({
  local Notify = Notification.Notify;
 
  Notify({
-		 Description = "Happy New Years!";
+		 Description = "WELCOME!";
 		 Title = "NA";
 		 Duration = 5;
 		 
